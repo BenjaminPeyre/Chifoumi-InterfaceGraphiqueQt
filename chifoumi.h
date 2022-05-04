@@ -2,7 +2,7 @@
  * Name:      chifoumiMain.h
  * Author:    P.Dagorret ()
  * Created:   2021-05-10
- * Description : classe mÈtier (= ModËle) Chifoumi-v1
+ * Description : classe m√©tier (= Mod√®le) Chifoumi-v1
  **************************************************************/
 #ifndef CHIFOUMI_H
 #define CHIFOUMI_H
@@ -12,71 +12,71 @@ using namespace std;
 
 class Chifoumi
 {
-    ///* ---- PARTIE MODËLE ---------------------------
+    ///* ---- PARTIE MOD√®LE ---------------------------
 
-        ///* Une dÈfinition de type ÈnumÈrÈ
+        ///* Une d√©finition de type √©num√©r√©
     public:
         enum UnCoup {pierre, papier, ciseau, rien};
 
-        ///* MÈthodes du ModËle
+        ///* M√©thodes du Mod√®le
     public:
         Chifoumi();
         virtual ~Chifoumi();
 
         // Getters
         UnCoup getCoupJoueur();
-            /* retourne le dernier coup jouÈ par le joueur */
+            /* retourne le dernier coup jou√© par le joueur */
         UnCoup getCoupMachine();
-            /* retourne le dernier coup jouÈ par le joueur */
+            /* retourne le dernier coup jou√© par le joueur */
         unsigned int getScoreJoueur();
             /* retourne le score du joueur */
         unsigned int getScoreMachine();
             /* retourne le score de la machine */
         char determinerGagnant();
-            /* dÈtermine le gagnant 'J' pour joueur, 'M' pour machine, 'N' pour match nul
-               en fonction du dernier coup jouÈ par chacun d'eux */
+            /* d√©termine le gagnant 'J' pour joueur, 'M' pour machine, 'N' pour match nul
+               en fonction du dernier coup jou√© par chacun d'eux */
 
-         ///* MÈthodes utilitaires du ModËle
+         ///* M√©thodes utilitaires du Mod√®le
     private :
         UnCoup genererUnCoup();
-    /* retourne une valeur alÈatoire = pierre, papier ou ciseau.
-       UtilisÈe pour faire jouer la machine */
+    /* retourne une valeur al√©atoire = pierre, papier ou ciseau.
+       Utilis√©e pour faire jouer la machine */
 
         // Setters
     public:
         void setCoupJoueur(UnCoup p_coup);
             /* initialise l'attribut coupJoueur avec la valeur
-               du paramËtre p_coup */
+               du param√®tre p_coup */
         void setCoupMachine(UnCoup p_coup);
              /* initialise l'attribut coupmachine avec la valeur
-               du paramËtre p_coup */
+               du param√®tre p_coup */
         void setScoreJoueur(unsigned int p_score);
             /* initialise l'attribut scoreJoueur avec la valeur
-               du paramËtre p_score */
+               du param√®tre p_score */
         void setScoreMachine(unsigned int p_score);
              /* initialise l'attribut coupMachine avec la valeur
-               du paramËtre p_score */
+               du param√®tre p_score */
 
         // Autres modificateurs
          void majScores(char p_gagnant);
-			/* Mise ‡ jour des scores en fonction des rËgles de gestion actuelles :
+			/* Mise √† jour des scores en fonction des r√®gles de gestion actuelles :
 				- 1 point pour le gagnant lorsqu'il y a un gagnant
 				- 0 point en cas de match nul
 			*/
         void initScores();
-            /* initialise ‡ 0 les attributs scoreJoueur et scoreMachine
+            /* initialise √† 0 les attributs scoreJoueur et scoreMachine
                NON indispensable */
         void initCoups();
-            /* initialise ‡ rien les attributs coupJoueur et coupMachine
+            /* initialise √† rien les attributs coupJoueur et coupMachine
                NON indispensable */
 
 
-         ///* Attributs du ModËle
+         ///* Attributs du Mod√®le
      private:
         unsigned int scoreJoueur;   // score actuel du joueur
         unsigned int scoreMachine;  // score actuel de la Machine
-        UnCoup coupJoueur;          // dernier coup jouÈ par le joueur
-        UnCoup coupMachine;         // dernier coup jouÈ par la machine
+        UnCoup coupJoueur;          // dernier coup jou√© par le joueur
+        UnCoup coupMachine;         // dernier coup jou√© par la machine
 };
 
 #endif // CHIFOUMI_H

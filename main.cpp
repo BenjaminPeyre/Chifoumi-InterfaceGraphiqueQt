@@ -2,7 +2,7 @@
  * Name:      main.cpp
  * Author:    P.Dagorret ()
  * Created:   2021-05-10
- * Description : Programme TEST de la classe métier Chifoumi-v1
+ * Description : Programme TEST de la classe mÃ©tier Chifoumi-v1
  **************************************************************/
 
 #include <iostream>
@@ -13,10 +13,10 @@ using namespace std;
 #include <ctime>
 #include <conio.h>
 
-///* ------  Spécifications des Sous-pogrammes utilitaires ------------
+///* ------  SpÃ©cifications des Sous-pogrammes utilitaires ------------
 
 Chifoumi::UnCoup genererCoup();
-/* duplique la méthode privée de la classe Chifoumi,
+/* duplique la mÃ©thode privÃ©e de la classe Chifoumi,
    pour ne pas modifier le code de la classe en la rendant publique
 */
 
@@ -24,10 +24,10 @@ void afficherScores(Chifoumi& p_jeu);
 // affiche les scores actuels des joueurs
 
 void afficherCoups(Chifoumi& p_jeu);
-// affiche les valeurs actuellement stockées dans les attributs coupJoeur et coupMachine
+// affiche les valeurs actuellement stockÃ©es dans les attributs coupJoeur et coupMachine
 
 string coup2String(Chifoumi::UnCoup p_coup);
-/* retourne une chaine correspondant à la valeur de p_coup, cad :
+/* retourne une chaine correspondant Ã  la valeur de p_coup, cad :
    retourne "rien" si p_coup = Chifoumi::rien,
    retourne "pierre" si p_coup = Chifoumi::pierre,
    etc...
@@ -38,7 +38,7 @@ int main()
 {
     ///teste constructeur
     Chifoumi monJeu; // un jeu de chifoumi
-    char rep ;      // réponse à demande de Quitter
+    char rep ;      // rÃ©ponse Ã  demande de Quitter
     cout << "appel du constructeur : construction d'un chifoumi : scores a 0, et coupsJoueurs a RIEN' " << endl;
     cout << endl;
 
@@ -66,14 +66,14 @@ int main()
     cout << endl;
 
      /// teste setCoupJoueur et setCoupMachine()
-    cout << "teste les méthodes set() et get() associees aux attributs 'coup'/'choix' " << endl;
+    cout << "teste les mÃ©thodes set() et get() associees aux attributs 'coup'/'choix' " << endl;
     monJeu.setCoupJoueur(Chifoumi::pierre);
     monJeu.setCoupMachine(Chifoumi::ciseau);
     afficherCoups(monJeu);
     cout << endl;
 
     cout << "quelques tours de jeu pour tester l'identification du gagnant et la maj des scores" << endl;
-    // le testeur peut itérer auatnt de fois qu'il/elle veut
+    // le testeur peut itÃ©rer auatnt de fois qu'il/elle veut
     while (true)
     {
         monJeu.setCoupJoueur(genererCoup());
@@ -96,11 +96,11 @@ int main()
     return 0;
 }
 
-///* ------  Définitions des sous-pogrammes utilitaires ------------
+///* ------  DÃ©finitions des sous-pogrammes utilitaires ------------
 
 Chifoumi::UnCoup genererCoup()
 {
-    Chifoumi::UnCoup valeurGeneree;   // valeur à retourner
+    Chifoumi::UnCoup valeurGeneree;   // valeur Ã  retourner
     unsigned int nbAleatoire;
     nbAleatoire = rand()%(4-1) + 1;
     switch (nbAleatoire)
