@@ -2,20 +2,21 @@
  * Name:      chifoumiMain.h
  * Author:    P.Dagorret ()
  * Created:   2021-05-10
- * Description : classe métier (= modèle) Chifoumi-v1
+ * Description : classe mï¿½tier (= modï¿½le) Chifoumi-v1
  **************************************************************/
 #include "chifoumi.h"
 
 #include <cstdlib>
 #include <ctime>
 
-
-    ///* ---- PARTIE MODèLE ---------------------------
+///* ---- PARTIE MODï¿½LE ---------------------------
 
 Chifoumi::Chifoumi()
 {
     //ctor
-    // partie modèle
+    // partie modÃ¨le
+    Chifoumi::initScores();
+    Chifoumi::initCoups();
 }
 
 Chifoumi::~Chifoumi()
@@ -23,7 +24,7 @@ Chifoumi::~Chifoumi()
     //dtor
 }
 
-        /// Getters
+/// Getters
 
 Chifoumi::UnCoup Chifoumi::getCoupJoueur() {
 	return rien;
@@ -46,25 +47,46 @@ char Chifoumi::determinerGagnant()
     char gagnantARetourner;
 
     // avant de commencer : match nul
-    gagnantARetourner = 'N';
+    gagnantARetourner = 'N'; // J M N
 
-    // il sera modifié dans l'un des cas suivants
+    // il sera modifiï¿½ dans l'un des cas suivants
+    if (getCoupJoueur() == papier && getCoupMachine() == pierre)
+    {
+        gagnantARetourner = 'J';
+    }
+    if (getCoupJoueur() == papier && getCoupMachine() == papier)
+        gagnantARetourner = 'N';
+    if (getCoupJoueur() == papier && getCoupMachine() == ciseau)
+        gagnantARetourner = 'M';
 
+    if (getCoupJoueur() == pierre && getCoupMachine() == pierre)
+        gagnantARetourner = 'N';
+    if (getCoupJoueur() == pierre && getCoupMachine() == papier)
+        gagnantARetourner = 'M';
+    if (getCoupJoueur() == pierre && getCoupMachine() == ciseau)
+        gagnantARetourner = 'J';
+
+    if (getCoupJoueur() == ciseau && getCoupMachine() == pierre)
+        gagnantARetourner = 'M';
+    if (getCoupJoueur() == ciseau && getCoupMachine() == papier)
+        gagnantARetourner = 'J';
+    if (getCoupJoueur() == ciseau && getCoupMachine() == ciseau)
+        gagnantARetourner = 'N';
 
     return gagnantARetourner;
 }
 
-         ///* Méthodes utilitaires du Modèle
+         ///* MÃ©thodes utilitaires du ModÃ¨le
 
 int randMinMax(int min, int max){
-    /* pré-condition : min<max ;
-       Le nbre aléatoire est compris entre [min, max[ */
+    /* prÃ©-condition : min<max ;
+       Le nbre alÃ©atoire est compris entre [min, max[ */
    return rand()%(max-min) + min;
 }
 
 Chifoumi::UnCoup Chifoumi::genererUnCoup()
 {
-    UnCoup valeurGeneree;   // valeur à retourner
+    UnCoup valeurGeneree;   // valeur Ã  retourner
 
 	valeurGeneree = rien;
     return valeurGeneree;
