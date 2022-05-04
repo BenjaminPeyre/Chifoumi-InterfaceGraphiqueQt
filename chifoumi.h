@@ -1,6 +1,6 @@
 /***************************************************************
  * Name:      chifoumiMain.h
- * Author:    P.Dagorret ()
+ * Author:    R.LARRALDE,B.PEYRE,L.DE BRITO
  * Created:   2021-05-10
  * Description : classe métier (= Modèle) Chifoumi-v1
  **************************************************************/
