@@ -1,8 +1,8 @@
 /***************************************************************
  * Name:      chifoumiMain.h
- * Author:    P.Dagorret ()
- * Created:   2021-05-10
- * Description : classe m�tier (= mod�le) Chifoumi-v1
+ * Author:    De Brito Luca, Larralde Remi, Peyre Benjamin
+ * Created:   28/03/2022
+ * Description : classe m�tier (= mod�le) Chifoumi-v0
  **************************************************************/
 #include "chifoumi.h"
 
@@ -27,19 +27,19 @@ Chifoumi::~Chifoumi()
 /// Getters
 
 Chifoumi::UnCoup Chifoumi::getCoupJoueur() {
-	return rien;
+	return coupJoueur;
 }
 
 Chifoumi::UnCoup Chifoumi::getCoupMachine() {
-    return rien;
+    return coupMachine;
 }
 
 unsigned int Chifoumi::getScoreJoueur() {
-    return 0;
+    return scoreJoueur;
 }
 
 unsigned int Chifoumi::getScoreMachine() {
-    return 0;
+    return scoreMachine;
 }
 
 char Chifoumi::determinerGagnant()
@@ -87,8 +87,26 @@ int randMinMax(int min, int max){
 Chifoumi::UnCoup Chifoumi::genererUnCoup()
 {
     UnCoup valeurGeneree;   // valeur à retourner
+    int min=1;
+    int max=3;
+    valeurGeneree = rien;
+    int choixMachine =randMinMax(min,max);
+    switch (choixMachine)
+    {
+    case 1:
+        valeurGeneree = pierre;
+        break;
+    case 2:
+        valeurGeneree = papier;
+        break;
+    case 3:
+        valeurGeneree = ciseau;
+        break;
 
-	valeurGeneree = rien;
+    default:
+        break;
+    }
+
     return valeurGeneree;
 }
 
