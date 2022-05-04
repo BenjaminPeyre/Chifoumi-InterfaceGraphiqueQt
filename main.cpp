@@ -1,6 +1,6 @@
 /***************************************************************
  * Name:      main.cpp
- * Author:    P.Dagorret ()
+ * Author:    R.LARRALDE,B.PEYRE,L.DE BRITO
  * Created:   2021-05-10
  * Description : Programme TEST de la classe métier Chifoumi-v1
  **************************************************************/
