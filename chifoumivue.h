@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <qpushbutton.h>
 #include "QObject"
+#include "QMessageBox"
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChifoumiVue; }
 QT_END_NAMESPACE
@@ -33,6 +34,7 @@ public:
         /* d�termine le gagnant 'J' pour joueur, 'M' porur machine, 'N' pou match nul
            en fonction du dernier coup jou� par chacun d'eux */
 private:
+    const QString VERSION_APPLICATION = "v3";
     Ui::ChifoumiVue *ui;
     UnCoup genererUnCoup();
     /* retourne une valeur al�atoire = pierre, papier ou ciseau.
@@ -73,18 +75,15 @@ public:
     /*mes a jour le score graphiquement*/
     void NouveauCoupsJoueur();
         /*  */
+    void msgboxE(QString titreFentre, QString Raison);
 
 public slots:
     void Lancementpartie();
     void btn_papier_clicked();
     void btn_pierre_clicked();
     void btn_ciseaux_clicked();
+    void btn_Aide_click();
+    void btn_quit();
 
-/*
-private slots:
-    void bouton_CiseauButton_clicked();
-    void bouton_PapierButton_clicked();
-    void bouton_PierreButton_clicked();
-    void NouvellePartieBouton_clicked();*/
 };
 #endif // CHIFOUMIVUE_H

@@ -11,6 +11,10 @@ ChifoumiVue::ChifoumiVue(QWidget *parent)
     connect(ui->PapierButton, SIGNAL(clicked()), this, SLOT(btn_papier_clicked()));
     connect(ui->CiseauButton, SIGNAL(clicked()), this, SLOT(btn_ciseaux_clicked()));
     connect(ui->PierreButton, SIGNAL(clicked()), this, SLOT(btn_pierre_clicked()));
+
+    connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(btn_Aide_click()));
+    connect(ui->actionQuitter, SIGNAL(triggered()), this,SLOT(btn_quit()));
+
 }
 
 ChifoumiVue::~ChifoumiVue()
@@ -156,12 +160,8 @@ void ChifoumiVue::MiseAJourScoreLabel()
 void ChifoumiVue::NouveauCoupsJoueur()
 {
     UnCoup mc =genererUnCoup();
-
-
     setCoupMachine(mc);
     majScores(determinerGagnant());
-
-
 }
 
 void ChifoumiVue::Lancementpartie(){
@@ -190,3 +190,23 @@ void ChifoumiVue::btn_ciseaux_clicked()
     setCoupJoueur(ciseau);
     NouveauCoupsJoueur();
 }
+
+void ChifoumiVue::btn_Aide_click()
+{
+    msgboxE("A propos de cette application.", VERSION_APPLICATION+"\n11/05/2022\n PEYRE BENJAMIN\n LUCA DE BRITO\n LARRALDE REMI" );
+}
+
+void ChifoumiVue::btn_quit()
+{
+    this->close();
+}
+
+void ChifoumiVue::msgboxE(QString titreFentre, QString Raison)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(titreFentre);
+    msgBox.setText(Raison);
+    msgBox.exec();
+
+}
+
