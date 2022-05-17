@@ -14,6 +14,8 @@ ChifoumiVue::ChifoumiVue(QWidget *parent)
 
     connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(btn_Aide_click()));
     connect(ui->actionQuitter, SIGNAL(triggered()), this,SLOT(btn_quit()));
+    //v4
+    ui->labelNbrPointPourGagne->setText(QString::number(NBR_POINT_GAGANT));
 
 }
 
@@ -133,6 +135,7 @@ void ChifoumiVue::majScores(char p_gagnant)
     }
     //Afficher le score sur la fenetre
     MiseAJourScoreLabel();
+    AtteintScoreFinPartie(p_gagnant);
 }
 
 void ChifoumiVue::initScores() {
@@ -209,4 +212,15 @@ void ChifoumiVue::msgboxE(QString titreFentre, QString Raison)
     msgBox.exec();
 
 }
+/*V4*/
+void ChifoumiVue::AtteintScoreFinPartie(char p_gagant)
+{
 
+if(scoreJoueur == NBR_POINT_GAGANT || scoreMachine == NBR_POINT_GAGANT){
+    if(p_gagant == 'J')
+        msgboxE("Fin de partie", "Bravo Le Joueur! Vous gagnez avec 5 points." );
+    if(p_gagant == 'M')
+        msgboxE("Fin de partie", "Bravo La Machine! Vous gagnez avec 5 points." );
+    BoutonCoupsEtat(false);
+}
+}

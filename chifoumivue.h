@@ -34,7 +34,8 @@ public:
         /* d�termine le gagnant 'J' pour joueur, 'M' porur machine, 'N' pou match nul
            en fonction du dernier coup jou� par chacun d'eux */
 private:
-    const QString VERSION_APPLICATION = "v3";
+    const QString VERSION_APPLICATION = "v4";
+    const int NBR_POINT_GAGANT = 5;
     Ui::ChifoumiVue *ui;
     UnCoup genererUnCoup();
     /* retourne une valeur al�atoire = pierre, papier ou ciseau.
@@ -76,6 +77,7 @@ public:
     void NouveauCoupsJoueur();
         /*  */
     void msgboxE(QString titreFentre, QString Raison);
+    void AtteintScoreFinPartie(char p);
 
 public slots:
     void Lancementpartie();
