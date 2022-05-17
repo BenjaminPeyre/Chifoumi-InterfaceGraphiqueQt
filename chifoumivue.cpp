@@ -7,16 +7,16 @@ ChifoumiVue::ChifoumiVue(QWidget *parent)
 {
     ui->setupUi(this);
     BoutonCoupsEtat(false);
-    QObject::connect(ui->NouvellePartieBouton, SIGNAL(clicked()), this, SLOT(Lancementpartie()));
+    connect(ui->NouvellePartieBouton, SIGNAL(clicked()), this, SLOT(Lancementpartie()));
     connect(ui->PapierButton, SIGNAL(clicked()), this, SLOT(btn_papier_clicked()));
     connect(ui->CiseauButton, SIGNAL(clicked()), this, SLOT(btn_ciseaux_clicked()));
     connect(ui->PierreButton, SIGNAL(clicked()), this, SLOT(btn_pierre_clicked()));
 
     connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(btn_Aide_click()));
     connect(ui->actionQuitter, SIGNAL(triggered()), this,SLOT(btn_quit()));
-    //v4
-    ui->labelNbrPointPourGagne->setText(QString::number(NBR_POINT_GAGANT));
 
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(finJeu()));
+    connect(m_chrono, SIGNAL(timeout()), this, SLOT(chrono()));
 }
 
 ChifoumiVue::~ChifoumiVue()
@@ -135,7 +135,6 @@ void ChifoumiVue::majScores(char p_gagnant)
     }
     //Afficher le score sur la fenetre
     MiseAJourScoreLabel();
-    AtteintScoreFinPartie(p_gagnant);
 }
 
 void ChifoumiVue::initScores() {
@@ -171,6 +170,13 @@ void ChifoumiVue::Lancementpartie(){
     BoutonCoupsEtat(true);
     ChifoumiVue::initScores();
     ChifoumiVue::initCoups();
+    m_temps=30;
+    ui->Chrono->setText(QString::number(m_temps));
+    m_timer->start(30000);
+    m_chrono->start(1000);
+    ChifoumiVue::MiseAJourScoreLabel();
+    ui->labelCoupMachine->setPixmap(QPixmap(":/chifoumi/images/rien_115.png"));
+    ui->labelCoupJoueur->setPixmap(QPixmap(":/chifoumi/images/rien_115.png"));
 }
 
 void ChifoumiVue::btn_papier_clicked()
@@ -212,15 +218,30 @@ void ChifoumiVue::msgboxE(QString titreFentre, QString Raison)
     msgBox.exec();
 
 }
-/*V4*/
-void ChifoumiVue::AtteintScoreFinPartie(char p_gagant)
-{
 
-if(scoreJoueur == NBR_POINT_GAGANT || scoreMachine == NBR_POINT_GAGANT){
-    if(p_gagant == 'J')
-        msgboxE("Fin de partie", "Bravo Le Joueur! Vous gagnez avec 5 points." );
-    if(p_gagant == 'M')
-        msgboxE("Fin de partie", "Bravo La Machine! Vous gagnez avec 5 points." );
+/*V5*/
+void ChifoumiVue::finJeu()
+{
+    m_timer->stop();
+    m_chrono->stop();
+    ui->Chrono->setText("0");
     BoutonCoupsEtat(false);
+    if (scoreJoueur>scoreMachine)
+    {
+        msgboxE("Fin de la partie", "Victoire du Joueur avec un score de "+QString::number(scoreJoueur)+" contre "+QString::number(scoreMachine));
+    }
+    else if (scoreJoueur<scoreMachine)
+    {
+        msgboxE("Fin de la partie", "Victoire de la Machine avec un score de "+QString::number(scoreMachine)+" contre "+QString::number(scoreJoueur));
+    }
+    else
+    {
+        msgboxE("Fin de la partie", "Egalité entre le Joueur et la Machine avec un score de "+QString::number(scoreMachine));
+    }
 }
+
+void ChifoumiVue::chrono()
+{
+    m_temps=m_temps-1;
+    ui->Chrono->setText(QString::number(m_temps));
 }

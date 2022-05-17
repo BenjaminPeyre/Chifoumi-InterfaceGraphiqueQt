@@ -5,6 +5,8 @@
 #include <qpushbutton.h>
 #include "QObject"
 #include "QMessageBox"
+#include <QTimer>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChifoumiVue; }
 QT_END_NAMESPACE
@@ -34,8 +36,7 @@ public:
         /* d�termine le gagnant 'J' pour joueur, 'M' porur machine, 'N' pou match nul
            en fonction du dernier coup jou� par chacun d'eux */
 private:
-    const QString VERSION_APPLICATION = "v4";
-    const int NBR_POINT_GAGANT = 5;
+    const QString VERSION_APPLICATION = "v3";
     Ui::ChifoumiVue *ui;
     UnCoup genererUnCoup();
     /* retourne une valeur al�atoire = pierre, papier ou ciseau.
@@ -44,6 +45,10 @@ private:
     unsigned int scoreMachine;  // score actuel de la Machine
     UnCoup coupJoueur;          // dernier coup jou� par le joueur
     UnCoup coupMachine;         // dernier coup jou� par la machine
+    QTimer *m_timer = new QTimer(this);
+    QTimer *m_chrono = new QTimer(this);
+    unsigned int m_temps;
+
 public:
     void setCoupJoueur(UnCoup p_coup);
         /* initialise l'attribut coupJoueur avec la valeur
@@ -77,7 +82,6 @@ public:
     void NouveauCoupsJoueur();
         /*  */
     void msgboxE(QString titreFentre, QString Raison);
-    void AtteintScoreFinPartie(char p);
 
 public slots:
     void Lancementpartie();
@@ -86,6 +90,8 @@ public slots:
     void btn_ciseaux_clicked();
     void btn_Aide_click();
     void btn_quit();
+    void finJeu();
+    void chrono();
 
 };
 #endif // CHIFOUMIVUE_H
