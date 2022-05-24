@@ -48,6 +48,8 @@ private:
     QTimer *m_timer = new QTimer(this);
     QTimer *m_chrono = new QTimer(this);
     unsigned int m_temps;
+    unsigned int m_tempsrestant;
+    unsigned int m_minute;
 
 public:
     void setCoupJoueur(UnCoup p_coup);
@@ -92,6 +94,7 @@ public slots:
     void btn_quit();
     void finJeu();
     void chrono();
+    void pause();
 
 };
 #endif // CHIFOUMIVUE_H
