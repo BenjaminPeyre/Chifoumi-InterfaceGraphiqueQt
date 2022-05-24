@@ -17,6 +17,8 @@ ChifoumiVue::ChifoumiVue(QWidget *parent)
 
     connect(m_timer, SIGNAL(timeout()), this, SLOT(finJeu()));
     connect(m_chrono, SIGNAL(timeout()), this, SLOT(chrono()));
+
+    connect(ui->bPause, SIGNAL(clicked()), this, SLOT(pause()));
 }
 
 ChifoumiVue::~ChifoumiVue()
@@ -151,6 +153,7 @@ void ChifoumiVue::BoutonCoupsEtat(bool etat){
 ui->CiseauButton->setEnabled(etat);
 ui->PapierButton->setEnabled(etat);
 ui->PierreButton->setEnabled(etat);
+ui->bPause->setEnabled(etat);
 }
 
 void ChifoumiVue::MiseAJourScoreLabel()
@@ -244,4 +247,21 @@ void ChifoumiVue::chrono()
 {
     m_temps=m_temps-1;
     ui->Chrono->setText(QString::number(m_temps));
+        m_chrono->start(1000);
+}
+
+void ChifoumiVue::pause()
+{
+    if (m_timer->isActive())
+    {
+        m_tempsrestant=m_timer->remainingTime();
+        m_minute=m_chrono->remainingTime();
+        m_timer->stop();
+        m_chrono->stop();
+    }
+    else
+    {
+        m_timer->start(m_tempsrestant);
+        m_chrono->start(m_minute);
+    }
 }
