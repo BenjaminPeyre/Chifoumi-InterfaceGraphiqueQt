@@ -384,6 +384,13 @@
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="bPause">
+            <property name="text">
+             <string>Pause</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="NouvellePartieBouton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
