@@ -1,6 +1,6 @@
 #include "chifoumivue.h"
 #include "ui_chifoumivue.h"
-
+#include "QDebug"
 ChifoumiVue::ChifoumiVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::ChifoumiVue)
@@ -19,6 +19,9 @@ ChifoumiVue::ChifoumiVue(QWidget *parent)
     connect(m_chrono, SIGNAL(timeout()), this, SLOT(chrono()));
 
     connect(ui->bPause, SIGNAL(clicked()), this, SLOT(pause()));
+    //v6
+    connect(ui->actionparamettre, SIGNAL(triggered()), this, SLOT(btnApropos()));
+    m_temps_partie=30000;
 }
 
 ChifoumiVue::~ChifoumiVue()
@@ -166,16 +169,19 @@ void ChifoumiVue::NouveauCoupsJoueur()
 {
     UnCoup mc =genererUnCoup();
     setCoupMachine(mc);
-    majScores(determinerGagnant());
+    char gagnant = determinerGagnant();
+    majScores(gagnant);
+    AtteintScoreFinPartie(gagnant);
 }
 
 void ChifoumiVue::Lancementpartie(){
+    ui->actionparamettre->setEnabled(false);
     BoutonCoupsEtat(true);
     ChifoumiVue::initScores();
     ChifoumiVue::initCoups();
-    m_temps=30;
+    m_temps=m_temps_partie/1000;
     ui->Chrono->setText(QString::number(m_temps));
-    m_timer->start(30000);
+    m_timer->start(m_temps_partie);
     m_chrono->start(1000);
     ChifoumiVue::MiseAJourScoreLabel();
     ui->labelCoupMachine->setPixmap(QPixmap(":/chifoumi/images/rien_115.png"));
@@ -201,6 +207,7 @@ void ChifoumiVue::btn_ciseaux_clicked()
     ui->labelCoupJoueur->setPixmap(QPixmap(":/chifoumi/images/ciseau_115.png"));
     setCoupJoueur(ciseau);
     NouveauCoupsJoueur();
+
 }
 
 void ChifoumiVue::btn_Aide_click()
@@ -225,6 +232,7 @@ void ChifoumiVue::msgboxE(QString titreFentre, QString Raison)
 /*V5*/
 void ChifoumiVue::finJeu()
 {
+    ui->actionparamettre->setEnabled(true);
     m_timer->stop();
     m_chrono->stop();
     ui->Chrono->setText("0");
@@ -247,7 +255,7 @@ void ChifoumiVue::chrono()
 {
     m_temps=m_temps-1;
     ui->Chrono->setText(QString::number(m_temps));
-        m_chrono->start(1000);
+    m_chrono->start(1000);
 }
 
 void ChifoumiVue::pause()
@@ -258,10 +266,52 @@ void ChifoumiVue::pause()
         m_minute=m_chrono->remainingTime();
         m_timer->stop();
         m_chrono->stop();
+        ui->bPause->setText("Reprendre");
     }
     else
     {
         m_timer->start(m_tempsrestant);
         m_chrono->start(m_minute);
+        ui->bPause->setText("Pause");
     }
+}
+
+void ChifoumiVue::btnApropos()
+{
+    Dialog * maDlg= new Dialog(this);
+    int retour = maDlg->exec();
+    qDebug() << retour<< Dialog::Accepted;
+
+    switch(retour)
+    {
+
+    case Dialog::Accepted :
+        if (!maDlg->getNom().isEmpty() && !maDlg->getNbPointsMax().isEmpty() && !maDlg->getTempsMax().isEmpty()){
+
+                m_temps_partie = maDlg->getTempsMax().toInt()*1000;
+                NBR_POINT_GAGANT = maDlg->getNbPointsMax().toInt();
+                ui->label_Nb_Score_Max->setText(QString::number(NBR_POINT_GAGANT));
+                nomUtilisateur = maDlg->getNom();
+
+            }
+    break;
+    case QDialog::Rejected :
+        ui->label_Nb_Score_Max->setText ("Erreur");
+
+        break;
+    default:break;
+
+    }
+}
+/*V4*/
+void ChifoumiVue::AtteintScoreFinPartie(char p_gagant)
+{
+
+if(scoreJoueur == NBR_POINT_GAGANT || scoreMachine == NBR_POINT_GAGANT){
+    if(p_gagant == 'J')
+        msgboxE("Fin de partie", "Bravo Le Joueur! Vous gagnez avec 5 points." );
+    if(p_gagant == 'M')
+        msgboxE("Fin de partie", "Bravo La Machine! Vous gagnez avec 5 points." );
+    BoutonCoupsEtat(false);
+}
 }

@@ -6,7 +6,7 @@
 #include "QObject"
 #include "QMessageBox"
 #include <QTimer>
-
+#include "dialog.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChifoumiVue; }
 QT_END_NAMESPACE
@@ -36,7 +36,8 @@ public:
         /* d�termine le gagnant 'J' pour joueur, 'M' porur machine, 'N' pou match nul
            en fonction du dernier coup jou� par chacun d'eux */
 private:
-    const QString VERSION_APPLICATION = "v3";
+    const QString VERSION_APPLICATION = "v6";
+    int NBR_POINT_GAGANT = 5;
     Ui::ChifoumiVue *ui;
     UnCoup genererUnCoup();
     /* retourne une valeur al�atoire = pierre, papier ou ciseau.
@@ -50,6 +51,8 @@ private:
     unsigned int m_temps;
     unsigned int m_tempsrestant;
     unsigned int m_minute;
+    unsigned int m_temps_partie;
+    QString nomUtilisateur;
 
 public:
     void setCoupJoueur(UnCoup p_coup);
@@ -84,7 +87,7 @@ public:
     void NouveauCoupsJoueur();
         /*  */
     void msgboxE(QString titreFentre, QString Raison);
-
+    void AtteintScoreFinPartie(char p_gagant);
 public slots:
     void Lancementpartie();
     void btn_papier_clicked();
@@ -95,6 +98,7 @@ public slots:
     void finJeu();
     void chrono();
     void pause();
+    void btnApropos();
 
 };
 #endif // CHIFOUMIVUE_H

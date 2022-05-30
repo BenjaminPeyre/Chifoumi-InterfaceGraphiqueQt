@@ -103,6 +103,36 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Gagnant à</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_Nb_Score_Max">
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Termps</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="Chrono">
               <property name="text">
                <string>0</string>
@@ -428,6 +458,7 @@
      <string>Fichier</string>
     </property>
     <addaction name="actionQuitter"/>
+    <addaction name="actionparamettre"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -453,6 +484,14 @@
    </property>
    <property name="shortcut">
     <string>F1</string>
+   </property>
+  </action>
+  <action name="actionparamettre">
+   <property name="text">
+    <string>Paramétrer</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
    </property>
   </action>
  </widget>
