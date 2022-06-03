@@ -7,6 +7,7 @@
 #include "QMessageBox"
 #include <QTimer>
 #include "dialog.h"
+#include "connexion.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChifoumiVue; }
 QT_END_NAMESPACE
@@ -37,7 +38,7 @@ public:
            en fonction du dernier coup jou� par chacun d'eux */
 private:
     const QString VERSION_APPLICATION = "v6";
-    int NBR_POINT_GAGANT = 5;
+    unsigned int NBR_POINT_GAGANT = 5;
     Ui::ChifoumiVue *ui;
     UnCoup genererUnCoup();
     /* retourne une valeur al�atoire = pierre, papier ou ciseau.
@@ -93,6 +94,8 @@ public slots:
     void btn_papier_clicked();
     void btn_pierre_clicked();
     void btn_ciseaux_clicked();
+
+
     void btn_Aide_click();
     void btn_quit();
     void finJeu();

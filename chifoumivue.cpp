@@ -22,6 +22,16 @@ ChifoumiVue::ChifoumiVue(QWidget *parent)
     //v6
     connect(ui->actionparamettre, SIGNAL(triggered()), this, SLOT(btnApropos()));
     m_temps_partie=30000;
+
+    //v7
+    this->hide();
+    connexion * DialogConnexion= new connexion(this);
+    int retour = DialogConnexion->exec();
+    if(retour){
+       nomUtilisateur = DialogConnexion->getPseudo();
+       this->show();
+    }
+
 }
 
 ChifoumiVue::~ChifoumiVue()
@@ -309,9 +319,9 @@ void ChifoumiVue::AtteintScoreFinPartie(char p_gagant)
 
 if(scoreJoueur == NBR_POINT_GAGANT || scoreMachine == NBR_POINT_GAGANT){
     if(p_gagant == 'J')
-        msgboxE("Fin de partie", "Bravo Le Joueur! Vous gagnez avec 5 points." );
+        msgboxE("Fin de partie", "Bravo Le Joueur! Vous gagnez avec "+QString::number(scoreJoueur)+"points." );
     if(p_gagant == 'M')
-        msgboxE("Fin de partie", "Bravo La Machine! Vous gagnez avec 5 points." );
+        msgboxE("Fin de partie", "Bravo La Machine! Vous gagnez avec "+QString::number(scoreMachine) +"points." );
     BoutonCoupsEtat(false);
 }
 }
