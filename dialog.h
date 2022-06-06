@@ -2,7 +2,8 @@
 #define DIALOG_H
 
 #include <QDialog>
-
+#include <QDialogButtonBox>
+#include <QPushButton>
 namespace Ui {
 class Dialog;
 }
@@ -17,6 +18,8 @@ public:
      QString getNom();
      QString getNbPointsMax();
      QString getTempsMax();
+public slots:
+          bool verifNom();
 private:
     Ui::Dialog *ui;
 
